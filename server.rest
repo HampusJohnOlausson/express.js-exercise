@@ -1,0 +1,15 @@
+GET http://localhost:5000/todos
+
+###
+
+GET http://localhost:5000/todos/1
+
+###
+
+POST http://localhost:5000/todos
+Content-Type: application/json
+
+{
+    "title": "Repeat"
+}
+###
