@@ -1,4 +1,5 @@
 import express from 'express';
+import _ from 'express-async-errors';
 import houseRouter from './routes/house.router.js'
 const app = express();
 
@@ -14,7 +15,14 @@ app.use('/api/houses', houseRouter);
 //  
 
 
-//error handler
+//error middleware
+
+app.use((err, req, res, next) => {
+    console.log(err);
+    const statusCode = err.status || err.statusCode || 500;
+     
+    res.status(statusCode).json({message: err.message })
+})
 
 //Start the applictaion
 app.listen(3500);
