@@ -1,0 +1,33 @@
+GET http://localhost:3500/api/houses
+
+###
+
+POST http://localhost:3500/api/houses
+Content-Type: application/json
+
+{
+    "area": 112,
+    "rok": 4,
+    "address": "Stenvägen 21",
+    "price": 2300000
+}
+
+###
+
+PUT http://localhost:3500/api/houses/1
+Content-Type: application/json
+
+{
+    "id": 1,
+    "area": 112,
+    "rok": 4,
+    "address": "Stenvägen 21",
+    "price": 2300000
+}
+
+
+###
+
+DELETE http://localhost:3500/api/houses/1
+
+###

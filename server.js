@@ -1,64 +1,20 @@
-const express = require('express');
+import express from 'express';
+import houseRouter from './routes/house.router.js'
 const app = express();
-const port = process.env.PORT || 5000;
 
-const todos = [
-    {
-        id: 1,
-        title: 'eat',
-    },
-     {
-        id: 2,
-        title: 'sleep',
-    }
-]
 
-app.use(express.static('./public'));
-
-app.use(express.json());
-
-app.get('/todos', (req, res) => {
-    res.json(todos);
-});
-
-app.get('/todos/:id', (req, res) => {
-    const id = req.params.id;
-    const findTodo = todos.find((todo) => { 
-        return todo.id == id;
-    })
-
-     if (!findTodo) {
-       return res.status(404).json("couldnt find id");
-     }
-
-    res.json(findTodo);
+app.use((req, res, next) => {
+    console.log('request to ', req.method + " " + req.path);
+    next();
 })
 
-app.post('/todos', (req, res) => {
+//all routers for the application
 
-    if(!req.body.title) {
-        return res.json('not found');
-    }
-    const titleToSave = req.body.title
+app.use('/api/houses', houseRouter);
+//  
 
-    let idToSave = 0;
-    todos.forEach((todo) => {
-        if(todo.id > idToSave ) {
-            idToSave = todo.id;
-        }
-    })
-    idToSave++;
 
-    todos.push({
-        id: idToSave,
-        title: titleToSave,
-    })
+//error handler
 
-    res.json({
-        status:  'ny todo tillagd'
-    });
-})
-
-app.listen(port, () => {
-    console.log(`server is running on http://localhost:${port}`);
-});
+//Start the applictaion
+app.listen(3500);
